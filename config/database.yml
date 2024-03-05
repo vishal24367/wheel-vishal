@@ -1,0 +1,27 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV['PG_HOST'] %>
+  pool: 5
+  username: <%= ENV['PG_USER'] %>
+  password: <%= ENV['PG_PASSWORD'] %>
+
+development:
+  <<: *default
+  database: wheel_development
+
+test:
+  <<: *default
+  database: wheel_test
+
+heroku:
+  <<: *default
+  database: wheel_heroku
+
+staging:
+  <<: *default
+  database: wheel_staging
+
+production:
+  <<: *default
+  database: wheel_production
