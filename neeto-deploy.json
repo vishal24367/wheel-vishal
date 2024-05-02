@@ -35,7 +35,8 @@
       "value": "true"
     }
   },
-  "formation": {},
+  "formation": {
+  },
   "addons": [
     {
       "plan": "neetodeploy-postgresql:basic",
@@ -51,5 +52,6 @@
     {
       "url": "heroku/ruby"
     }
-  ]
+  ],
+  "nixpacks": "{\n  \"build\": {\n    \"dependsOn\": [\n      \"install\",\n      \"node:install\"\n    ],\n    \"cmds\": [\n      \"bundle exec rake assets:precompile\",\n      \"bundle exec bootsnap precompile app/ lib/\"\n    ]\n  },\n  \"install\": {\n    \"dependsOn\": [\n      \"setup\"\n    ],\n    \"cmds\": [\n      \"bundle install\",\n      \"bundle exec bootsnap precompile --gemfile\"\n    ],\n    \"onlyIncludeFiles\": [\n      \"Gemfile\",\n      \"Gemfile.lock\"\n    ],\n    \"cacheDirectories\": [\n      \"/root/.bundle/cache\"\n    ],\n    \"paths\": [\n      \"/usr/local/rvm/rubies/3.2.2/bin\",\n      \"/usr/local/rvm/gems/3.2.2/bin\",\n      \"/usr/local/rvm/gems/3.2.2@global/bin\"\n    ]\n  },\n  \"node:install\": {\n    \"dependsOn\": [\n      \"setup\"\n    ],\n    \"cmds\": [\n      \"yarn install --frozen-lockfile\"\n    ],\n    \"cacheDirectories\": [\n      \"/root/.cache/Cypress\",\n      \"/usr/local/share/.cache/yarn/v6\"\n    ],\n    \"paths\": [\n      \"/app/node_modules/.bin\"\n    ]\n  },\n  \"node:setup\": {\n    \"nixPkgs\": [\n      \"nodejs_18\",\n      \"yarn-1_x\"\n    ],\n    \"nixOverlays\": [\n      \"https://github.com/railwayapp/nix-npm-overlay/archive/main.tar.gz\"\n    ],\n    \"nixpkgsArchive\": \"bf744fe90419885eefced41b3e5ae442d732712d\"\n  },\n  \"release\": {\n    \"dependsOn\": [\n      \"setup\",\n      \"install\",\n      \"build\"\n    ],\n    \"cmds\": [\n      \"bundle exec rake db:migrate && bundle exec rake reset_and_populate_sample_data\"\n    ]\n  },\n  \"setup\": {\n    \"nixPkgs\": [\n      \"rustc\"\n    ],\n    \"nixOverlays\": [\n\n    ],\n    \"nixpkgsArchive\": \"5148520bfab61f99fd25fb9ff7bfbb50dad3c9db\",\n    \"aptPkgs\": [\n      \"procps\",\n      \"libpq-dev\",\n      \"git\",\n      \"curl\",\n      \"autoconf\",\n      \"bison\",\n      \"build-essential\",\n      \"libssl-dev\",\n      \"libyaml-dev\",\n      \"libreadline6-dev\",\n      \"zlib1g-dev\",\n      \"libncurses5-dev\",\n      \"libffi-dev\",\n      \"libgdbm6\",\n      \"libgdbm-dev\",\n      \"libdb-dev\"\n    ],\n    \"cmds\": [\n      \"curl -fsSL https://github.com/rbenv/rbenv-installer/raw/HEAD/bin/rbenv-installer | bash -s stable && printf '\\\\neval \\\"$(~/.rbenv/bin/rbenv init -)\\\"' >> /root/.profile && . /root/.profile && rbenv install 3.2.2 && rbenv global 3.2.2 && gem install bundler:2.4.8\"\n    ],\n    \"onlyIncludeFiles\": [\n\n    ],\n    \"paths\": [\n      \"$HOME/.rbenv/bin\"\n    ]\n  }\n}"
 }
