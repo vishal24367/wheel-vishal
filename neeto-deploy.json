@@ -145,6 +145,33 @@
       "paths": [
         "$HOME/.rbenv/bin"
       ]
+    },
+    "new": {
+      "cmds": [
+        ""
+      ],
+      "onlyIncludeFiles": [
+        ""
+      ],
+      "dependsOn": [
+
+      ],
+      "aptPkgs": [
+
+      ],
+      "nixPkgs": [
+
+      ],
+      "cacheDirectories": [
+        ""
+      ],
+      "paths": [
+        ""
+      ],
+      "nixOverlays": [
+        ""
+      ],
+      "nixpkgsArchive": ""
     }
   }
 }
