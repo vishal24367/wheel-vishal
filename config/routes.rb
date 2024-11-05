@@ -19,6 +19,8 @@ Rails.application.routes.draw do
   draw :active_admin
   draw :api
 
+  get "/metrics", to: "metrics#index"
+
   root "home#index"
   get "*path", to: "home#index", via: :all
 end

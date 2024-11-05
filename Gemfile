@@ -50,6 +50,9 @@ gem "bootsnap", ">= 1.9.4", require: false
 # Background jobs
 gem "sidekiq", "<8"
 
+# For scrapping metrics
+gem "prometheus-client"
+
 group :development, :test do
   # Rails integration for factory-bot
   gem "factory_bot_rails"
