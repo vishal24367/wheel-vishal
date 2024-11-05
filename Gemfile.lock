@@ -108,6 +108,7 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    base64 (0.2.0)
     bcrypt (3.1.18)
     better_html (2.0.1)
       actionview (>= 6.0)
@@ -221,12 +222,12 @@ GEM
     net-smtp (0.4.0.1)
       net-protocol
     nio4r (2.7.0)
-    nokogiri (1.16.5)
-      mini_portile2 (~> 2.8.2)
     nokogiri (1.16.2-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.2-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.16.5)
+      mini_portile2 (~> 2.8.2)
     nokogiri (1.16.5-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.16.5-x86_64-linux)
@@ -236,6 +237,8 @@ GEM
     parser (3.2.2.1)
       ast (~> 2.4.1)
     pg (1.5.3)
+    prometheus-client (4.2.3)
+      base64
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -377,8 +380,8 @@ GEM
     zeitwerk (2.6.15)
 
 PLATFORMS
-  ruby
   arm64-darwin-22
+  ruby
   x86_64-darwin-21
   x86_64-darwin-22
   x86_64-darwin-23
@@ -404,6 +407,7 @@ DEPENDENCIES
   minitest
   minitest-ci
   pg
+  prometheus-client
   pry-byebug
   puma
   rails (~> 7.0.8)
