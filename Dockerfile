@@ -15,7 +15,7 @@ ENV RAILS_ENV="production" \
     LOG_LEVEL=":info"
 
 # Rails app lives here
-WORKDIR /workspace/repo
+WORKDIR /workspace
 
 # Install base packages
 RUN apt-get update -qq && \
@@ -62,4 +62,4 @@ FROM base
 
 # Copy built artifacts: gems, application
 COPY --from=build "${BUNDLE_PATH}" "${BUNDLE_PATH}"
-COPY --from=build /workspace/repo /workspace/repo
+COPY --from=build /workspace /workspace
