@@ -1,0 +1,9 @@
+---
+fail_fast: true
+plan_slug: beginner
+triggers:
+- event: cron
+  branch: ''
+  cron_line: ''
+commands:
+- checkout
