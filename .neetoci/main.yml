@@ -1,0 +1,8 @@
+---
+plan_slug: beginner
+triggers:
+- event: cron
+  branch: main
+  cron_line: "*/20 * * * *"
+commands:
+- checkout
