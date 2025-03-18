@@ -3,6 +3,10 @@ version: v1.0
 fail_fast: true
 plan: professional-1
 
+envs:
+  - key: S3_BUCKET
+    value: neeto-record-mp4-recordings-staging
+
 commands:
   - echo "Downloading the file from the given source input"
   - curl -o /tmp/$FILE_NAME.vp9 $SOURCE_INPUT
@@ -10,6 +14,11 @@ commands:
   - ffmpeg -i /tmp/$FILE_NAME.vp9 -c:v libx264 -c:a aac -preset ultrafast -r 25 -crf 23 -g 250 -tune film -vprofile high -pix_fmt yuv420p -movflags +faststart /tmp/$FILE_NAME.mp4
   - echo "Uploading the converted MP4 file to S3"
   - aws s3 cp /tmp/$FILE_NAME.mp4 s3://$S3_BUCKET/$FILE_PATH/$FILE_NAME.mp4 --region us-east-1
+
+epilogue:
+  on_pass:
+    commands:
+      - artifacts push job /tmp/$FILE_NAME.mp4
 
 triggers:
   - event: api
