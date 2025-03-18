@@ -22,7 +22,6 @@ global_job_config:
       commands:
         - echo "Converting the given VP9 file to MP4"
         - ffmpeg -i /tmp/$FILE_NAME.vp9 -c:v libx264 -c:a aac -preset ultrafast -r 25 -crf 23 -g 250 -tune film -vprofile high -pix_fmt yuv420p -movflags +faststart /tmp/$FILE_NAME.mp4
-        - echo "Uploading the converted MP4 file to S3"
         - aws s3 cp /tmp/$FILE_NAME.mp4 s3://$S3_BUCKET/$FILE_PATH/$FILE_NAME.mp4 --region us-east-1
 
 triggers:
