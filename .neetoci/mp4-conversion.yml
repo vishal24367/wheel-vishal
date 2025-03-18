@@ -1,10 +1,10 @@
 version: v1.0
 
-fail_fast: false
+fail_fast: true
 plan: professional-1
 
 envs:
-  - key: SOURCE_FILE
+  - key: SOURCE_INPUT
     value: https://d2tagele5v9dwg.cloudfront.net/31ebb876-cb20-4aea-9872-8c098a43eb7b/92c93be5-3ae1-44ba-a56d-615191d8c9ec/3066da4d-5124-4e12-937e-8fb0deae43a9
   - key: S3_BUCKET
     value: neeto-record-mp4-recordings-staging
@@ -12,19 +12,18 @@ envs:
     value: 31ebb876-cb20-4aea-9872-8c098a43eb7b/92c93be5-3ae1-44ba-a56d-615191d8c9ec
   - key: FILE_NAME
     value: 3066da4d-5124-4e12-937e-8fb0deae43a9
-  - key: FILE_EXTENSION
-    value: mp4
 
 global_job_config:
   setup:
-    - echo "Source file: $SOURCE_FILE"
-    - echo "Destination path: $FILE_PATH"
+    - echo "Downloading the file from the given source input"
+    - curl -o /tmp/$FILE_NAME.vp9 $SOURCE_INPUT
   jobs:
     - name: MP4 Conversion
       commands:
-        - echo "Converting the given file from vp9 to mp4"
-        - ffmpeg -i $SOURCE_FILE -c:v libx264 -c:a copy -preset ultrafast -r 25 -crf 23 -g 250 -tune film -vprofile high -pix_fmt yuv420p -movflags +faststart /tmp/$FILE_NAME.$FILE_EXTENSION
-        - aws s3 cp /tmp/$FILE_NAME.$FILE_EXTENSION s3://$S3_BUCKET/$FILE_PATH/$FILE_NAME.$FILE_EXTENSION --region us-east-1
+        - echo "Converting the given VP9 file to MP4"
+        - ffmpeg -i /tmp/$FILE_NAME.vp9 -c:v libx264 -c:a copy -preset ultrafast -r 25 -crf 23 -g 250 -tune film -vprofile high -pix_fmt yuv420p -movflags +faststart /tmp/$FILE_NAME.mp4  # Convert the file to .mp4
+        - echo "Uploading the converted MP4 file to S3"
+        - aws s3 cp /tmp/$FILE_NAME.mp4 s3://$S3_BUCKET/$FILE_PATH/$FILE_NAME.mp4 --region us-east-1
 
 triggers:
   - event: api
