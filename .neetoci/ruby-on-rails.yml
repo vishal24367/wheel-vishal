@@ -9,7 +9,11 @@ commands:
 - neetoci-version ruby 3.3.5
 - neetoci-version node 18.12
 - neetoci-service start postgres 18
-- bundle install --deployment --path vendor/bundle
+- neetoci-service start redis 7.0.5
 - cp config/database.yml.ci config/database.yml
-- bundle exec rake db:setup
-- bundle exec rake test
+- bundle config path 'vendor/bundle'
+- bundle install --jobs 1
+- yarn install
+- bundle exec rake db:create db:schema:load --trace
+- bundle exec rails test
+- bundle exec rake setup
