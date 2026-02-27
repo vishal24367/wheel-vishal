@@ -14,7 +14,7 @@ command:
 nvm install
 ```
 
-Make sure that [yarn](https://yarnpkg.com) is installed with it as well in your
+Make sure that [yarn](https://yarnpkg.com) is not installed with it as well in your
 system.
 
 After `yarn` is installed, install the Node.js and Rails dependencies and also
