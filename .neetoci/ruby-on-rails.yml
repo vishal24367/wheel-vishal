@@ -18,4 +18,4 @@ commands:
 - cache store
 - bundle exec rake db:create db:schema:load --trace
 - bundle exec rails test
-- bundle exec rails setup
+- bundle exec rake setup
