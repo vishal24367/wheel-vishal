@@ -27,10 +27,6 @@
       "prettier --write",
       "eslint --fix"
     ],
-    "cypress-tests/**/*.{js,jsx,json}": [
-      "prettier --write",
-      "eslint --fix"
-    ],
     "./**/*.rb": [
       "bundle exec rubocop -a --force-exclusion"
     ],
@@ -58,7 +54,7 @@
     "lint-staged": "^12.3.7",
     "prettier": "^2.6.1",
     "prettier-plugin-tailwindcss": "^0.1.8",
-    "vite": "^6.0.3"
+    "vite": "^6.2.7"
   },
   "dependencies": {
     "@babel/core": "^7.19.1",
@@ -67,14 +63,14 @@
     "@babel/preset-env": "7.17.10",
     "@babel/preset-react": "^7.16.7",
     "@babel/preset-typescript": "^7.21.0",
-    "@babel/runtime": "^7.19.0",
+    "@babel/runtime": "^7.26.10",
     "@bigbinary/neeto-icons": "1.8.17",
     "@bigbinary/neetoui": "^4.0.3",
     "@emotion/is-prop-valid": "^1.2.0",
     "@rollup/pluginutils": "^5.1.4",
     "@svgr/plugin-svgo": "^8.1.0",
     "antd": "^4.23.1",
-    "axios": "1.7.7",
+    "axios": "1.8.2",
     "babel-loader": "^8.2.5",
     "babel-plugin-dynamic-import-node": "^2.3.3",
     "babel-plugin-js-logger": "^1.0.17",
@@ -86,7 +82,7 @@
     "core-js": "3.21.1",
     "crypto-browserify": "^3.12.1",
     "css-loader": "^6.7.3",
-    "esbuild": "^0.23.1",
+    "esbuild": "^0.25.0",
     "esbuild-plugin-svgr": "^3.1.0",
     "esbuild-plugin-yaml": "^0.0.1",
     "esbuild-plugins-node-modules-polyfill": "^1.6.8",
